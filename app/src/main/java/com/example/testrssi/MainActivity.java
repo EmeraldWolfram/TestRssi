@@ -1,6 +1,7 @@
 package com.example.testrssi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -61,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
+            Intent nextAct  = new Intent(this, RationAlgoActivity.class);
+            startActivity(nextAct);
             return true;
         }
 

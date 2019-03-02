@@ -9,27 +9,27 @@
         android:id="@+id/coordinateX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="X: 80" />
+        android:text="@string/coorX" />
 
     <TextView
         android:id="@+id/coordinateY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/coordinateX"
-        android:text="Y: 90"/>
+        android:text="@string/coorY"/>
 
     <TextView
         android:id="@+id/timeUsed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/coordinateY"
-        android:text="30s"/>
+        android:text="@string/timeUsed"/>
 
     <Button
         android:id="@+id/refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REFRESH"
+        android:text="@string/refresh"
         android:onClick="onRefreshClicked"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>

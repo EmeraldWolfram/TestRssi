@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TestRssi</string>
     <string name="action_settings">Settings</string>
+    <string name="refresh">REFRESH</string>
+    <string name="timeUsed">---s</string>
+    <string name="coorY">Y: --</string>
+    <string name="coorX">X: --</string>
 </resources>

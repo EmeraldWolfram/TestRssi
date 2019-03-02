@@ -3,6 +3,7 @@ package com.example.testrssi.presenter;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 
+import com.example.testrssi.MvpInterface.MvpRationAlgo;
 import com.example.testrssi.model.AccessPoint;
 import com.example.testrssi.model.Coordinate;
 import com.example.testrssi.model.RationAlgoBot;
@@ -10,15 +11,17 @@ import com.example.testrssi.model.RationAlgoBot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RationAlgoPresenter {
+public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
 
     private WifiManager wifiManager;
     private RationAlgoBot bot;
     private List<ScanResult> results;
     private List<AccessPoint> accessPoints;
-    private Coordinate  targetCoor;
 
-    public RationAlgoPresenter(WifiManager wifiManager) {
+    private MvpRationAlgo.MvpView taskView;
+
+    public RationAlgoPresenter(MvpRationAlgo.MvpView taskView, WifiManager wifiManager) {
+        this.taskView       = taskView;
         this.wifiManager    = wifiManager;
         this.accessPoints   = new ArrayList<>();
         this.bot            = new RationAlgoBot();
@@ -36,28 +39,32 @@ public class RationAlgoPresenter {
                 }
             }
 
-            this.bot.setupApCoor(
-                    this.accessPoints.get(0).getCoordinate().getCoorX().intValue(),
-                    this.accessPoints.get(1).getCoordinate().getCoorX().intValue(),
-                    this.accessPoints.get(2).getCoordinate().getCoorX().intValue(),
-                    this.accessPoints.get(0).getCoordinate().getCoorY().intValue(),
-                    this.accessPoints.get(1).getCoordinate().getCoorY().intValue(),
-                    this.accessPoints.get(2).getCoordinate().getCoorY().intValue()
-            );
-
-
+            if(accessPoints.size() != 3) {
+                taskView.reportError("FATAL: Number of AP is not equal to 3");
+            } else {
+                this.bot.setupApCoor(
+                        this.accessPoints.get(0).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(1).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(2).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(0).getCoordinate().getCoorY().intValue(),
+                        this.accessPoints.get(1).getCoordinate().getCoorY().intValue(),
+                        this.accessPoints.get(2).getCoordinate().getCoorY().intValue()
+                );
+            }
         } else {
-            // ToDo: View report Scan Error
+            taskView.reportError("ERROR: Failed to Scan");
         }
 
     }
 
     public void onRefresh(){
-        float[] d;
+        float[]     d;
+        long        nanoTime;
+        Coordinate  targetCoor;
+
         if (accessPoints.size() != 3) {
-            // ToDo: View report FATAL ERROR
-        }
-        if(this.wifiManager.startScan()) {
+            taskView.reportError("FATAL: Number of AP is not equal to 3");
+        } else if(this.wifiManager.startScan()) {
             results = this.wifiManager.getScanResults();
             d   = new float[accessPoints.size()];
             for (int i = 0; i < accessPoints.size(); i++) {
@@ -65,14 +72,14 @@ public class RationAlgoPresenter {
                 ap.findMyRssi(results);
                 d[i]    = ap.getTargetDistance();
             }
-            // track time start
 
+            nanoTime    = System.nanoTime();
             targetCoor  = bot.determineCoordinate(d[0], d[1], d[2]);
-            // track time end
-            // ToDo: View displayCoordinate
-            // ToDo: View display timeStart - timeEnd
+            nanoTime    = System.nanoTime() - nanoTime;
+            taskView.showCoordinate(targetCoor);
+            taskView.showComputeTime(nanoTime);
         } else {
-            // ToDo: View report Scan Error
+            taskView.reportError("ERROR: Failed to Scan");
         }
     }
 
