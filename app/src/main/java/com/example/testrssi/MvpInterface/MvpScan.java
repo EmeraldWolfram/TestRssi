@@ -1,4 +1,4 @@
-package com.example.testrssi;
+package com.example.testrssi.MvpInterface;
 
 import android.content.Context;
 import android.net.wifi.ScanResult;

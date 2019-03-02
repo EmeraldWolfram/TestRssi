@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RationAlgoActivity">
+
+    <TextView
+        android:id="@+id/coordinateX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X: 80" />
+
+    <TextView
+        android:id="@+id/coordinateY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coordinateX"
+        android:text="Y: 90"/>
+
+    <TextView
+        android:id="@+id/timeUsed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coordinateY"
+        android:text="30s"/>
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REFRESH"
+        android:onClick="onRefreshClicked"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

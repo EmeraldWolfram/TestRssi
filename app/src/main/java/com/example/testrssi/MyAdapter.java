@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.example.testrssi.model.ScanResultHolder;
+
 import java.util.List;
 
 public class MyAdapter extends ArrayAdapter<ScanResult> {

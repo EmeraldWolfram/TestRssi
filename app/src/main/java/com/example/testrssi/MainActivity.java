@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
         }
 
@@ -68,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void scanResults() {
         WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        results = wifi.getScanResults();
+        if(wifi.startScan()) {
+            results = wifi.getScanResults();
+        } else {
+            Toast.makeText(this, "Start SCAN return NO", Toast.LENGTH_SHORT).show();
+        }
     }
 }

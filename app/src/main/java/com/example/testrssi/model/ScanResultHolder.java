@@ -1,15 +1,17 @@
-package com.example.testrssi;
+package com.example.testrssi.model;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.testrssi.R;
+
 public class ScanResultHolder  extends RecyclerView.ViewHolder {
     // each data item is just a string in this case
-    TextView ssidView;
-    TextView macView;
-    TextView rssiView;
+    private TextView ssidView;
+    private TextView macView;
+    private TextView rssiView;
 
     public ScanResultHolder(View view) {
         super(view);
