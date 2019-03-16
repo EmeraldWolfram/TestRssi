@@ -7,4 +7,10 @@ public class RssiConverter {
         return (float) Math.pow(10.0, exp);
     }
 
+    public static float convertRssiToD(float rssi){
+        double exp = (27.55 - (20 * Math.log10(2412)) + Math.abs(rssi)) / 20.0;
+        return (float) Math.pow(10.0, exp);
+    }
+
+
 }

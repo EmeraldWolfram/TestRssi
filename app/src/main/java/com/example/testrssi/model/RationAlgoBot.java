@@ -2,37 +2,29 @@ package com.example.testrssi.model;
 
 public class RationAlgoBot {
 
-    private int x0, x1, x2, y0, y1, y2;
+    private float x0, x1, x2, y0, y1, y2;
     //private int[] x, y;
     private float mTanA, mTanB;
 
 
     public RationAlgoBot(){}
 
-    public RationAlgoBot(int x0, int x1, int x2, int y0, int y1, int y2) {
+    public RationAlgoBot(float x0, float x1, float x2, float y0, float y1, float y2) {
         float m1, m2;
 
         this.x0  = x0; this.x1 = x1; this.x2 = x2;
         this.y0  = y0; this.y1 = y1; this.y2 = y2;
 
 
-        m1  = (float) (y1 - y0) / (x1 - x0);
-        m2  = (float) (y2 - y0) / (x2 - x0);
+        m1  = (y1 - y0) / (x1 - x0);
+        m2  = (y2 - y0) / (x2 - x0);
 
-        mTanA   = -m1;
-        mTanB   = -m2;
+        mTanA   = -1 / m1;
+        mTanB   = -1 / m2;
     }
 
 
-    //public void setX(int index, int x) {
-    //    this.x0 = x0;
-    //}
-
-    //public void setY(int index, int y) {
-
-    //}
-
-    public void setupApCoor(int x0, int x1, int x2, int y0, int y1, int y2) {
+    public void setupApCoor(float x0, float x1, float x2, float y0, float y1, float y2) {
         float m1, m2;
 
         this.x0 = x0;
@@ -43,11 +35,11 @@ public class RationAlgoBot {
         this.y2 = y2;
 
 
-        m1 = (float) (y1 - y0) / (x1 - x0);
-        m2 = (float) (y2 - y0) / (x2 - x0);
+        m1 = (y1 - y0) / (x1 - x0);
+        m2 = (y2 - y0) / (x2 - x0);
 
-        mTanA = -m1;
-        mTanB = -m2;
+        mTanA = -1 / m1;
+        mTanB = -1 / m2;
     }
 
     public Coordinate determineCoordinate(float d0, float d1, float d2) {
@@ -64,7 +56,6 @@ public class RationAlgoBot {
 
         cTanA   = yTanA - mTanA * xTanA;
         cTanB   = yTanB - mTanB * xTanB;
-
 
         result.setCoorX((cTanB - cTanA) / (mTanA - mTanB));
         result.setCoorY((mTanB*cTanA - mTanA*cTanB) / (mTanB - mTanA));

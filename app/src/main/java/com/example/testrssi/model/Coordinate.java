@@ -1,5 +1,7 @@
 package com.example.testrssi.model;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Coordinate {
     private Float coorX;
     private Float coorY;
@@ -24,5 +26,11 @@ public class Coordinate {
 
     public Float getCoorY() {
         return coorY;
+    }
+
+    @NotNull
+    @Override
+    public String toString() {
+        return "(" + coorX.toString() + ", " + coorY.toString() + ")" ;
     }
 }
