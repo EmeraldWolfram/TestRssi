@@ -5,7 +5,10 @@ import android.net.wifi.WifiManager;
 
 import com.example.testrssi.MvpInterface.MvpRationAlgo;
 import com.example.testrssi.model.AccessPoint;
+import com.example.testrssi.model.CoGravityAlgoBot;
 import com.example.testrssi.model.Coordinate;
+import com.example.testrssi.model.CramerAlgoBot;
+import com.example.testrssi.model.GaussianAlgoBot;
 import com.example.testrssi.model.RationAlgoBot;
 
 import java.util.ArrayList;
@@ -14,7 +17,10 @@ import java.util.List;
 public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
 
     private WifiManager wifiManager;
-    private RationAlgoBot bot;
+    private RationAlgoBot bot0;
+    private CramerAlgoBot bot1;
+    private GaussianAlgoBot bot2;
+    private CoGravityAlgoBot bot3;
     private List<ScanResult> results;
     private List<AccessPoint> accessPoints;
 
@@ -24,7 +30,27 @@ public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
         this.taskView       = taskView;
         this.wifiManager    = wifiManager;
         this.accessPoints   = new ArrayList<>();
-        this.bot            = new RationAlgoBot();
+        this.bot0           = new RationAlgoBot();
+        this.bot1           = new CramerAlgoBot();
+        this.bot2           = new GaussianAlgoBot();
+        this.bot3           = new CoGravityAlgoBot();
+    }
+
+    public void setupWriter(){
+
+        if(accessPoints.size() != 3) {
+            taskView.reportError("FATAL: Number of AP is not equal to 3");
+        } else {
+            taskView.writeToFile(accessPoints.get(0).getName() + ","
+                    + accessPoints.get(1).getName() + ","
+                    + accessPoints.get(2).getName() + ","
+                    + "Ration (X), Ration (Y), Ration (ns),"
+                    + "Cramer (X), Cramer (Y), Cramer (ns),"
+                    + "Gaussian(X), Gaussian(Y), Gaussian (ns),"
+                    + "Center Gravity (X), Center Gravity (Y), Center Gravity (ns),\n"
+            );
+        }
+
     }
 
     public void setupAccessPoints(){
@@ -33,7 +59,7 @@ public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
         if(this.wifiManager.startScan()) {
             results = this.wifiManager.getScanResults();
             for (ScanResult result: results) {
-                if(result.SSID.contains("StevenFYP")) {
+                if(result.SSID.contains("Steven")) {
                     accessPoint = new AccessPoint(result);
                     accessPoints.add(accessPoint);
                 }
@@ -42,7 +68,7 @@ public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
             if(accessPoints.size() != 3) {
                 taskView.reportError("FATAL: Number of AP is not equal to 3");
             } else {
-                this.bot.setupApCoor(
+                this.bot0.setupApCoor(
                         this.accessPoints.get(0).getCoordinate().getCoorX().intValue(),
                         this.accessPoints.get(1).getCoordinate().getCoorX().intValue(),
                         this.accessPoints.get(2).getCoordinate().getCoorX().intValue(),
@@ -50,6 +76,34 @@ public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
                         this.accessPoints.get(1).getCoordinate().getCoorY().intValue(),
                         this.accessPoints.get(2).getCoordinate().getCoorY().intValue()
                 );
+
+                this.bot1.setupApCoor(
+                        this.accessPoints.get(0).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(1).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(2).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(0).getCoordinate().getCoorY().intValue(),
+                        this.accessPoints.get(1).getCoordinate().getCoorY().intValue(),
+                        this.accessPoints.get(2).getCoordinate().getCoorY().intValue()
+                );
+                this.bot2.setupApCoor(
+                        this.accessPoints.get(0).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(1).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(2).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(0).getCoordinate().getCoorY().intValue(),
+                        this.accessPoints.get(1).getCoordinate().getCoorY().intValue(),
+                        this.accessPoints.get(2).getCoordinate().getCoorY().intValue()
+                );
+
+                this.bot3.setupApCoor(
+                        this.accessPoints.get(0).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(1).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(2).getCoordinate().getCoorX().intValue(),
+                        this.accessPoints.get(0).getCoordinate().getCoorY().intValue(),
+                        this.accessPoints.get(1).getCoordinate().getCoorY().intValue(),
+                        this.accessPoints.get(2).getCoordinate().getCoorY().intValue()
+
+                );
+
             }
         } else {
             taskView.reportError("ERROR: Failed to Scan");
@@ -59,7 +113,6 @@ public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
 
     public void onRefresh(){
         float[]     d;
-        long        nanoTime;
         Coordinate  targetCoor;
 
         if (accessPoints.size() != 3) {
@@ -73,15 +126,33 @@ public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
                 d[i]    = ap.getTargetDistance();
             }
 
-            nanoTime    = System.nanoTime();
-            targetCoor  = bot.determineCoordinate(d[0], d[1], d[2]);
-            nanoTime    = System.nanoTime() - nanoTime;
-            taskView.showCoordinate(targetCoor);
-            taskView.showComputeTime(nanoTime);
+            taskView.writeToFile(d[0] + "," + d[1] + "," + d[2] + ",");
+
+            targetCoor  = bot0.determineCoordinate(d[0], d[1], d[2]);
+            taskView.showCoordinate0(targetCoor);
+            taskView.writeToFile(targetCoor.toCsvString());
+
+            targetCoor  = bot1.determineCoordinate(d[0], d[1], d[2]);
+            taskView.showCoordinate1(targetCoor);
+            taskView.writeToFile(targetCoor.toCsvString());
+
+            targetCoor  = bot2.determineCoordinate(d[0], d[1], d[2]);
+            taskView.showCoordinate2(targetCoor);
+            taskView.writeToFile(targetCoor.toCsvString());
+
+            targetCoor  = bot3.determineCoordinate(d[0], d[1], d[2]);
+            taskView.showCoordinate3(targetCoor);
+            taskView.writeToFile(targetCoor.toCsvString());
+
+
+            taskView.writeToFile("\n");
+
         } else {
             taskView.reportError("ERROR: Failed to Scan");
         }
     }
+
+
 
 
 }

@@ -1,5 +1,7 @@
 package com.example.testrssi.model;
 
+import android.os.health.SystemHealthManager;
+
 public class RationAlgoBot {
 
     private float x0, x1, x2, y0, y1, y2;
@@ -44,21 +46,22 @@ public class RationAlgoBot {
 
     public Coordinate determineCoordinate(float d0, float d1, float d2) {
         Coordinate result;
-        float yTanA, xTanA, yTanB, xTanB, cTanA, cTanB;
+        long nanoTime;
+        float cTanA, cTanB;
+        float ratio1, ratio2;
 
         result  = new Coordinate();
-        yTanA   = (y1 - y0) * (d0 / (d1 + d0)) + y0;
-        xTanA   = (x1 - x0) * (d0 / (d1 + d0)) + x0;
+        nanoTime= System.nanoTime();
 
-        yTanB   = (y2 - y0) * (d0 / (d2 + d0)) + y0;
-        xTanB   = (x2 - x0) * (d0 / (d2 + d0)) + x0;
+        ratio1  = d0 / (d1 + d0);
+        ratio2  = d0 / (d2 + d0);
 
-
-        cTanA   = yTanA - mTanA * xTanA;
-        cTanB   = yTanB - mTanB * xTanB;
+        cTanA   = ((y1 - y0) * ratio1 + y0) - mTanA * ((x1 - x0) * ratio1 + x0);
+        cTanB   = ((y2 - y0) * ratio2 + y0) - mTanB * ((x2 - x0) * ratio2 + x0);
 
         result.setCoorX((cTanB - cTanA) / (mTanA - mTanB));
         result.setCoorY((mTanB*cTanA - mTanA*cTanB) / (mTanB - mTanA));
+        result.setTimeUsed(System.nanoTime() - nanoTime);
 
         return result;
     }

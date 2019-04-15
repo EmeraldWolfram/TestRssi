@@ -2,18 +2,17 @@ package com.example.testrssi.model;
 
 import org.junit.Test;
 
+import static org.junit.Assert.*;
 
-public class RationAlgoBotTest {
-
-    RationAlgoBot bot;
-
+public class CoGravityAlgoBotTest {
+    CoGravityAlgoBot bot;
 
     @Test
-    public void testDetermineCoordinate_perfect() {
+    public void determineCoordinate_perfect() {
         Float d[];
         long nanoTime;
 
-        bot = new RationAlgoBot();
+        bot = new CoGravityAlgoBot();
         bot.setupApCoor((float)0.0, (float)77.5, (float)20, (float)0.0, (float)20, (float)77.5);
 
         d   = new Float[3];
@@ -25,15 +24,16 @@ public class RationAlgoBotTest {
         System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
+        nanoTime            = target.getTimeUsed();
         System.out.println(target.toString());
-
+        System.out.println(nanoTime);
     }
 
     @Test
     public void testDetermineCoordinate_1() {
         Float d[];
 
-        bot = new RationAlgoBot();
+        bot = new CoGravityAlgoBot();
         bot.setupApCoor((float)0.0, (float)77.5, (float)20, (float)0.0, (float)20, (float)77.5);
 
         d   = new Float[3];
@@ -52,7 +52,7 @@ public class RationAlgoBotTest {
     public void testDetermineCoordinate_2() {
         Float d[];
 
-        bot = new RationAlgoBot();
+        bot = new CoGravityAlgoBot();
         bot.setupApCoor((float)0.0, (float)77.5, (float)20, (float)0.0, (float)20, (float)77.5);
 
         d   = new Float[3];
@@ -71,7 +71,7 @@ public class RationAlgoBotTest {
     public void testDetermineCoordinate_3() {
         Float d[];
 
-        bot = new RationAlgoBot();
+        bot = new CoGravityAlgoBot();
         bot.setupApCoor((float)0.0, (float)77.5, (float)20, (float)0.0, (float)20, (float)77.5);
 
         d   = new Float[3];
@@ -90,7 +90,7 @@ public class RationAlgoBotTest {
     public void testDetermineCoordinate_4() {
         Float d[];
 
-        bot = new RationAlgoBot();
+        bot = new CoGravityAlgoBot();
         bot.setupApCoor((float)0.0, (float)77.5, (float)20, (float)0.0, (float)20, (float)77.5);
 
         d   = new Float[3];
@@ -109,7 +109,7 @@ public class RationAlgoBotTest {
     public void testDetermineCoordinate_5() {
         Float d[];
 
-        bot = new RationAlgoBot();
+        bot = new CoGravityAlgoBot();
         bot.setupApCoor((float)0.0, (float)77.5, (float)20, (float)0.0, (float)20, (float)77.5);
 
         d   = new Float[3];
@@ -128,7 +128,7 @@ public class RationAlgoBotTest {
     public void testDetermineCoordinate_6() {
         Float d[];
 
-        bot = new RationAlgoBot();
+        bot = new CoGravityAlgoBot();
         bot.setupApCoor((float)0.0, (float)77.5, (float)20, (float)0.0, (float)20, (float)77.5);
 
         d   = new Float[3];
@@ -147,7 +147,7 @@ public class RationAlgoBotTest {
     public void testDetermineCoordinate_7() {
         Float d[];
 
-        bot = new RationAlgoBot();
+        bot = new CoGravityAlgoBot();
         bot.setupApCoor((float)0.0, (float)77.5, (float)20, (float)0.0, (float)20, (float)77.5);
 
         d   = new Float[3];
@@ -161,7 +161,4 @@ public class RationAlgoBotTest {
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
         System.out.println(target.toString());
     }
-    /*
-        -58.33333333	-58.33333333	-13.66666667
-    */
 }

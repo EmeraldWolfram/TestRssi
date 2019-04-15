@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 public class Coordinate {
     private Float coorX;
     private Float coorY;
-    // time used;
+    private Long timeUsed;
 
     public Coordinate(){
         coorX   = (float) 0.0;
@@ -20,6 +20,10 @@ public class Coordinate {
         this.coorY = coorY;
     }
 
+    public void setTimeUsed(Long timeUsed) {
+        this.timeUsed = timeUsed;
+    }
+
     public Float getCoorX() {
         return coorX;
     }
@@ -28,9 +32,18 @@ public class Coordinate {
         return coorY;
     }
 
+    public Long getTimeUsed() {
+        return timeUsed;
+    }
+
     @NotNull
     @Override
     public String toString() {
-        return "(" + coorX.toString() + ", " + coorY.toString() + ")" ;
+        return "(" + coorX.toString() + ", " + coorY.toString() + ": " + timeUsed.toString() + "ns)" ;
     }
+
+    public String toCsvString(){
+        return coorX.toString() + ", " + coorY.toString() + ", " + timeUsed.toString() + "ns,";
+    }
+
 }

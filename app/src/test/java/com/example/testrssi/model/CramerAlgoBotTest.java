@@ -24,11 +24,9 @@ public class CramerAlgoBotTest {
 
         System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
-        nanoTime    = System.nanoTime();
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
-        nanoTime    = System.nanoTime() - nanoTime;
         System.out.println(target.toString());
-        System.out.println(nanoTime);
+
     }
 
     @Test

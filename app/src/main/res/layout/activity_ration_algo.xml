@@ -3,36 +3,149 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context=".RationAlgoActivity">
 
     <TextView
-        android:id="@+id/coordinateX"
-        android:layout_width="wrap_content"
+        android:id="@+id/title_0"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/coorX" />
+        android:layout_alignParentTop="true"
+        android:text="@string/tangential_algorithm"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/coordinateY"
+        android:id="@+id/coordinate_0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/coordinateX"
-        android:text="@string/coorY"/>
+        android:layout_below="@id/title_0"
+        android:text="@string/coor"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
 
     <TextView
-        android:id="@+id/timeUsed"
+        android:id="@+id/time_used_0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/coordinateY"
-        android:text="@string/timeUsed"/>
+        android:layout_below="@id/coordinate_0"
+        android:text="@string/time"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+
+    <TextView
+        android:id="@+id/title_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_used_0"
+        android:paddingTop="20dp"
+        android:text="@string/cramer_rules_on_circular"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/coordinate_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_1"
+        android:text="@string/coor"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/time_used_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coordinate_1"
+        android:text="@string/time"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/title_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_used_1"
+        android:paddingTop="20dp"
+        android:text="@string/gaussian_elimination_on_circular"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/coordinate_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_2"
+        android:text="@string/coor"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/time_used_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coordinate_2"
+        android:text="@string/time"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/title_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_used_2"
+        android:paddingTop="20dp"
+        android:text="@string/center_of_gravity_algorithm"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/coordinate_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_3"
+        android:text="@string/coor"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/time_used_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coordinate_3"
+        android:text="@string/time"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
 
     <Button
         android:id="@+id/refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/refresh"
-        android:onClick="onRefreshClicked"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="onRefreshClicked"
+        android:text="@string/refresh"
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
+
+
 
 
 </RelativeLayout>
