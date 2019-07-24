@@ -24,9 +24,8 @@ public class CoGravityAlgoBotTest {
         System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
-        nanoTime            = target.getTimeUsed();
         System.out.println(target.toString());
-        System.out.println(nanoTime);
+
     }
 
     @Test
@@ -42,10 +41,12 @@ public class CoGravityAlgoBotTest {
         d[1]    = RssiConverter.convertRssiToD((float)-49.6667);
         d[2]    = RssiConverter.convertRssiToD((float)-47);
 
-        System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
+        //System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
-        System.out.println(target.toString());
+        target.setActual((float)32.5, (float)32.5);
+        target.computeError();
+        System.out.println(target.toCsvString());
     }
 
     @Test
@@ -61,10 +62,12 @@ public class CoGravityAlgoBotTest {
         d[1]    = RssiConverter.convertRssiToD((float)-53.6667);
         d[2]    = RssiConverter.convertRssiToD((float)-60);
 
-        System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
+        //System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
-        System.out.println(target.toString());
+        target.setActual((float)38.75, (float)10.0);
+        target.computeError();
+        System.out.println(target.toCsvString());
     }
 
     @Test
@@ -80,10 +83,12 @@ public class CoGravityAlgoBotTest {
         d[1]    = RssiConverter.convertRssiToD((float)-59.3333);
         d[2]    = RssiConverter.convertRssiToD((float)-50.3333);
 
-        System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
+        //System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
-        System.out.println(target.toString());
+        target.setActual((float)10.0, (float)38.75);
+        target.computeError();
+        System.out.println(target.toCsvString());
     }
 
     @Test
@@ -99,10 +104,12 @@ public class CoGravityAlgoBotTest {
         d[1]    = RssiConverter.convertRssiToD((float)-50.6667);
         d[2]    = RssiConverter.convertRssiToD((float)-50.3333);
 
-        System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
+        //System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
-        System.out.println(target.toString());
+        target.setActual((float)48.75, (float)48.75);
+        target.computeError();
+        System.out.println(target.toCsvString());
     }
 
     @Test
@@ -118,10 +125,12 @@ public class CoGravityAlgoBotTest {
         d[1]    = RssiConverter.convertRssiToD((float)-58.6667);
         d[2]    = RssiConverter.convertRssiToD((float)-54.3333);
 
-        System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
+        //System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
-        System.out.println(target.toString());
+        target.setActual((float)2.5, (float)2.5);
+        target.computeError();
+        System.out.println(target.toCsvString());
     }
 
     @Test
@@ -137,10 +146,12 @@ public class CoGravityAlgoBotTest {
         d[1]    = RssiConverter.convertRssiToD((float)-10.6667);
         d[2]    = RssiConverter.convertRssiToD((float)-57);
 
-        System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
+        //System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
-        System.out.println(target.toString());
+        target.setActual((float)75.0, (float)20.0);
+        target.computeError();
+        System.out.println(target.toCsvString());
     }
 
     @Test
@@ -156,9 +167,11 @@ public class CoGravityAlgoBotTest {
         d[1]    = RssiConverter.convertRssiToD((float)-58.3333);
         d[2]    = RssiConverter.convertRssiToD((float)-13.6667);
 
-        System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
+        //System.out.println("0:" + d[0] + ", 1:" + d[1] + ", 2:" + d[2]);
 
         Coordinate target   = bot.determineCoordinate(d[0], d[1], d[2]);
-        System.out.println(target.toString());
+        target.setActual((float)20.0, (float)75.0);
+        target.computeError();
+        System.out.println(target.toCsvString());
     }
 }

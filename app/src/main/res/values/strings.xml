@@ -3,9 +3,11 @@
     <string name="action_settings">Settings</string>
     <string name="refresh">REFRESH</string>
     <string name="time">---ns</string>
-    <string name="coor">X:--, Y:--</string>
+    <string name="coor">(X:--, Y:--)   Error: --m </string>
     <string name="tangential_algorithm">Tangential Algorithm</string>
     <string name="cramer_rules_on_circular">Cramer Rules on Circular</string>
     <string name="gaussian_elimination_on_circular">Gaussian Elimination on Circular</string>
     <string name="center_of_gravity_algorithm">Center of Gravity Algorithm</string>
+    <string name="actual_x">Actual X</string>
+    <string name="actual_y">Actual Y</string>
 </resources>

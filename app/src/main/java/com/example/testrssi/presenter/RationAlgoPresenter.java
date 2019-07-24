@@ -44,10 +44,10 @@ public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
             taskView.writeToFile(accessPoints.get(0).getName() + ","
                     + accessPoints.get(1).getName() + ","
                     + accessPoints.get(2).getName() + ","
-                    + "Ration (X), Ration (Y), Ration (ns),"
-                    + "Cramer (X), Cramer (Y), Cramer (ns),"
-                    + "Gaussian(X), Gaussian(Y), Gaussian (ns),"
-                    + "Center Gravity (X), Center Gravity (Y), Center Gravity (ns),\n"
+                    + "Ration (X), Ration (Y), Ration (ns), Error (0.1m),"
+                    + "Cramer (X), Cramer (Y), Cramer (ns), Error (0.1m),"
+                    + "Gaussian(X), Gaussian(Y), Gaussian (ns), Error (0.1m),"
+                    + "Center Gravity (X), Center Gravity (Y), Center Gravity (ns), Error (0.1m)\n"
             );
         }
 
@@ -111,7 +111,8 @@ public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
 
     }
 
-    public void onRefresh(){
+    @Override
+    public void onRefresh(Float actualX, Float actualY){
         float[]     d;
         Coordinate  targetCoor;
 
@@ -129,18 +130,26 @@ public class RationAlgoPresenter implements MvpRationAlgo.MvpPresenterV {
             taskView.writeToFile(d[0] + "," + d[1] + "," + d[2] + ",");
 
             targetCoor  = bot0.determineCoordinate(d[0], d[1], d[2]);
+            targetCoor.setActual(actualX, actualY);
+            targetCoor.computeError();
             taskView.showCoordinate0(targetCoor);
             taskView.writeToFile(targetCoor.toCsvString());
 
             targetCoor  = bot1.determineCoordinate(d[0], d[1], d[2]);
+            targetCoor.setActual(actualX, actualY);
+            targetCoor.computeError();
             taskView.showCoordinate1(targetCoor);
             taskView.writeToFile(targetCoor.toCsvString());
 
             targetCoor  = bot2.determineCoordinate(d[0], d[1], d[2]);
+            targetCoor.setActual(actualX, actualY);
+            targetCoor.computeError();
             taskView.showCoordinate2(targetCoor);
             taskView.writeToFile(targetCoor.toCsvString());
 
             targetCoor  = bot3.determineCoordinate(d[0], d[1], d[2]);
+            targetCoor.setActual(actualX, actualY);
+            targetCoor.computeError();
             taskView.showCoordinate3(targetCoor);
             taskView.writeToFile(targetCoor.toCsvString());
 

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import com.example.testrssi.presenter.RationAlgoPresenter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 
 
 public class RationAlgoActivity extends AppCompatActivity implements MvpRationAlgo.MvpView {
@@ -31,6 +34,9 @@ public class RationAlgoActivity extends AppCompatActivity implements MvpRationAl
 
     private TextView timeUsedView3;
     private TextView coorView3;
+
+    private EditText xInput;
+    private EditText yInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,8 @@ public class RationAlgoActivity extends AppCompatActivity implements MvpRationAl
         this.timeUsedView3  = findViewById(R.id.time_used_3);
         this.coorView3      = findViewById(R.id.coordinate_3);
 
+        this.xInput         = findViewById(R.id.input_x);
+        this.yInput         = findViewById(R.id.input_y);
     }
 
     private void initMvp(){
@@ -63,7 +71,16 @@ public class RationAlgoActivity extends AppCompatActivity implements MvpRationAl
     }
 
     public void onRefreshClicked(View view) {
-        this.taskPresenter.onRefresh();
+        Float actualX;
+        Float actualY;
+        if(xInput.getText().toString().isEmpty() || yInput.getText().toString().isEmpty()) {
+            this.taskPresenter.onRefresh(null, null);
+        } else {
+            actualX   = Float.parseFloat(xInput.getText().toString());
+            actualY   = Float.parseFloat(yInput.getText().toString());
+            this.taskPresenter.onRefresh(actualX, actualY);
+        }
+
     }
 
     @Override
@@ -73,18 +90,24 @@ public class RationAlgoActivity extends AppCompatActivity implements MvpRationAl
 
     @Override
     public void showCoordinate0(Coordinate coor) {
-        String coorStr  = "(X: " + coor.getCoorX().toString()
-                + ", Y: " + coor.getCoorY().toString() + ")";
-        String timeStr  = coor.getTimeUsed().toString();
+        String coorStr  = "(X: "
+                + String.format(Locale.ENGLISH, "%.4f", coor.getCoorX())
+                + ", Y: "
+                + String.format(Locale.ENGLISH, "%.4f", coor.getCoorY())
+                + ")  Error: " + coor.getError();
+        String timeStr  = coor.getTimeUsed().toString()  + "ns";
         coorView0.setText(coorStr);
         timeUsedView0.setText(timeStr);
     }
 
     @Override
     public void showCoordinate1(Coordinate coor) {
-        String coorStr  = "(X: " + coor.getCoorX().toString()
-                + ", Y: " + coor.getCoorY().toString() + ")";
-        String timeStr  = coor.getTimeUsed().toString();
+        String coorStr  = "(X: "
+                + String.format(Locale.ENGLISH, "%.4f", coor.getCoorX())
+                + ", Y: "
+                + String.format(Locale.ENGLISH, "%.4f", coor.getCoorY())
+                + ")  Error: " + coor.getError();
+        String timeStr  = coor.getTimeUsed().toString()  + "ns";
 
         coorView1.setText(coorStr);
         timeUsedView1.setText(timeStr);
@@ -92,9 +115,12 @@ public class RationAlgoActivity extends AppCompatActivity implements MvpRationAl
 
     @Override
     public void showCoordinate2(Coordinate coor) {
-        String coorStr  = "(X: " + coor.getCoorX().toString()
-                + ", Y: " + coor.getCoorY().toString() + ")";
-        String timeStr  = coor.getTimeUsed().toString();
+        String coorStr  = "(X: "
+                + String.format(Locale.ENGLISH, "%.4f", coor.getCoorX())
+                + ", Y: "
+                + String.format(Locale.ENGLISH, "%.4f", coor.getCoorY())
+                + ")  Error: " + coor.getError();
+        String timeStr  = coor.getTimeUsed().toString() + "ns";
 
         coorView2.setText(coorStr);
         timeUsedView2.setText(timeStr);
@@ -102,9 +128,12 @@ public class RationAlgoActivity extends AppCompatActivity implements MvpRationAl
 
     @Override
     public void showCoordinate3(Coordinate coor) {
-        String coorStr  = "(X: " + coor.getCoorX().toString()
-                + ", Y: " + coor.getCoorY().toString() + ")";
-        String timeStr  = coor.getTimeUsed().toString();
+        String coorStr  = "(X: "
+                + String.format(Locale.ENGLISH, "%.4f", coor.getCoorX())
+                + ", Y: "
+                + String.format(Locale.ENGLISH, "%.4f", coor.getCoorY())
+                + ")  Error: " + coor.getError();
+        String timeStr  = coor.getTimeUsed().toString()  + "ns";
         coorView3.setText(coorStr);
         timeUsedView3.setText(timeStr);
     }

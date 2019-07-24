@@ -18,7 +18,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:allowBackup="false">
-        <activity android:name=".RationAlgoActivity" />
+        <activity
+            android:name=".RationAlgoActivity"
+            android:label="Localization Algorithm"
+            android:screenOrientation="userPortrait"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
